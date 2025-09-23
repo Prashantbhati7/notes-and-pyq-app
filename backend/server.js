@@ -38,6 +38,7 @@ app.use(
       secure: false, // true if using HTTPS
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 1 day
+      sameSite:'none',
     },  
   })  
 );  
