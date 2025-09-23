@@ -19,7 +19,7 @@ export default function Navbar() {
   }, []);
   const logout = () => {
     window.open(
-      `http://localhost:3000/auth/logout`,
+      `${import.meta.env.VITE_APP_API_URL}/auth/logout`,
       "_self"
     )
   };
