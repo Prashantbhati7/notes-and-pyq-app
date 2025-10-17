@@ -7,7 +7,6 @@ const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
 const {CloudinaryStorage}= require("multer-storage-cloudinary")
 const passport = require("passport");
-const authRoutes = require("./route/auth.js");
 const cookieSession = require("cookie-session");
 const session = require("express-session");
 const Stategy = require("passport-google-oauth20");
@@ -176,6 +175,5 @@ app.get("/notes",middleware,async (req, res) => {
   res.json(notes);             // give notes as response when fetch req, is sent via frontend 
 });
 
-app.use("/auth",authRoutes);
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
