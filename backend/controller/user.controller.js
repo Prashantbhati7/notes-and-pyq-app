@@ -38,13 +38,18 @@ const registerUser = asyncHandler(async(req,res)=>{
 
     if (!registeredUser) throw new apiError(400,"user not registered ");
 
-    const accessToken = await registeredUser.generateAccessToken();
-    const refreshToken = await  registeredUser.generateRefreshToken();
+    // const accessToken = await registeredUser.generateAccessToken();
+    // const refreshToken = await  registeredUser.generateRefreshToken();
 
-    if (!accessToken || !refreshToken ) throw new apiError(401,{},"access tokens not generated ");
+    // if (!accessToken || !refreshToken ) throw new apiError(401,{},"access tokens not generated ");
 
+    // registeredUser.refreshToken = refreshToken;
 
+    // await registeredUser.save({validateBeforeSave:false});
 
+    const {refreshToken,accessToken} = await generateAccessAndRefreshToken(registeredUser._id);
+
+    if (!accessToken || !refreshToken) throw new apiError(401,"accesstoken and refresh token not generated ");
 
     console.log(`${username} registered successfully !!`)
     const options = {
@@ -99,5 +104,9 @@ const logoutuser  = asyncHandler(async(req,res)=>{
     return res.status(200).clearCookie("accessToken",options).clearCookie("refreshToken",options).json(new apiResponse(200,{},"user Logged out seccessfully "))
 
 })
-
-export {registerUser,loginuser,logoutuser};
+const authuser = asyncHandler(async(req,res)=>{
+    const user = req.user;
+    if (!user) throw new apiError(400,"User not found");
+    return res.status(200).json(new apiResponse(200,{user:user},"user is logged in already "));
+})
+export {registerUser,loginuser,logoutuser,authuser};

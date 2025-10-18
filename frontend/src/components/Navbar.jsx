@@ -1,17 +1,19 @@
 
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
 import '../index.css'
 export default function Navbar() {
   const Navigate = useNavigate();
   const [user, setuser] = useState(null);
   const getuser = async () => {
-    let url = `${import.meta.env.VITE_APP_API_URL}/auth/login/success`;
-    let { data } = await axios(url, { withCredentials: true });
-    // let data = res.json();
-    // console.log(`${import.meta.env.VITE_APP_API_URL}`)
-    console.log(data.user._json);
+    let url = `${import.meta.env.VITE_APP_API_URL}/api/v1/user/auth/success`;
+    const response = await fetch(url,{
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await response.json();
+    console.log("user data from navbar is ",data);
     setuser(data.user._json);
   }
   useEffect(() => {

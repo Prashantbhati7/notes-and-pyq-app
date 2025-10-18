@@ -8,7 +8,7 @@ export const verifyJWT = asyncHandler(async(req,res,next)=>{        // to verify
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ","");            // custom header for case of mobile application 
         if (!token){
-            throw new ApiError(401,"Authentication failed   ! ")
+            throw new apiError(401,"Authentication failed   ! ")
         }
         const decoded_token =  jwt.verify(token , process.env.ACCESS_TOKEN_SECRET);
     
