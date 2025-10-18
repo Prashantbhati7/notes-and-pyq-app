@@ -8,11 +8,11 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        required,
+        require:true,
     },
     password:{
         type:String,
-        required,
+        required:true,
     },
     refreshToken:{
         type:String,
@@ -24,23 +24,37 @@ userSchema.pre("save",async function(next){
         this.password = await bcrypt.hash(this.password,10);
     }
     next();
-})
+})       // not arrow function because we want this reference here 
 
-userSchema.isCorrPass = async function(password){
 
+userSchema.methods.isCorrectPass = async function(password){          // To check if password is correct or not 
+    return await bcrypt.compare(password,this.password);
 }
 
 userSchema.methods.generateAccessToken = function(){
     return jwt.sign({
-        _id:this._id,
-    },process.env.ACCESS_TOKEN_SECRET,{expiresIn:process.env.ACCESS_TOKEN_EXPIRY})
+        _id:this._id,                       //Payload 
+        email:this.email,
+        username:this.username,
+        fullname:this.fullname,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+        expiresIn:process.env.ACCESS_TOKEN_EXPIRY
+    }
+)
 }
-
 
 userSchema.methods.generateRefreshToken = function(){
     return jwt.sign({
-        _id:this._id,
-    },process.env.REFRESH_TOKEN_SECRET,{expiresIn:REFRESH_TOKEN_EXPIRY})
+        _id:this._id,                       //Payload 
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+        expiresIn:process.env.REFRESH_TOKEN_EXPIRY
+    }
+)
 }
 
-const User = mongoose.model("User",userSchema);
+ const User = mongoose.model("User",userSchema);
+ export default User;
