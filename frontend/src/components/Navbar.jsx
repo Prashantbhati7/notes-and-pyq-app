@@ -1,29 +1,20 @@
 
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import { useFirebase } from './context/firebase';
 import '../index.css'
-export default function Navbar() {
+export default function Navbar({}) {
   const Navigate = useNavigate();
-  const [user, setuser] = useState(null);
-  const getuser = async () => {
-    let url = `${import.meta.env.VITE_APP_API_URL}/api/v1/user/auth/success`;
-    const response = await fetch(url,{
-      method: "GET",
-      credentials: "include",
-    });
-    const data = await response.json();
-    console.log("user data from navbar is ",data);
-    setuser(data.user._json);
-  }
-  useEffect(() => {
-    getuser();
-  }, []);
-  const logout = () => {
-    window.open(
-      `${import.meta.env.VITE_APP_API_URL}/auth/logout`,
-      "_self"
-    )
+  const firebase = useFirebase();
+  const logout = async() => {
+    //  const response  = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/v1/user/logout`,{
+    //   method:"GET",
+    //   credentials:"include",
+    //  });
+    //  const data = await response.json();
+    //  console.log("logout response is ",data);
+    firebase.logout();
+    Navigate('/');
   };
   const renderlogin = () => {
     Navigate('/login');
@@ -45,18 +36,18 @@ export default function Navbar() {
       {/* Right Buttons (Login / Signup / Logout) */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-end gap-3 pr-4">
 
-        {!user && (
+        {!firebase.isloggedin && (
           <>
             <div>
               <button className="login sm:w-[20%] md:w-full  text-left animate-bounce text-xl" onClick={renderlogin}>Login</button>
             </div>
             <div>
-              <button className="signup sm:w-[20%] md:w-full  text-left text-xl" onClick={rendersignup}>Signup</button>
+              <button className="signup sm:w-[20%] md:w-full  text-left text-xl" onClick={rendersignup}  >Signup</button>
             </div>
           </>
         )}
 
-        {user && (
+        {firebase.isloggedin && (
           <button className="text-xl" onClick={logout}>Logout</button>
         )}
 

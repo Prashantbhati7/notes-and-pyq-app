@@ -8,17 +8,17 @@ import Navbar from './components/Navbar'
 import Semnotes from './pages/Semnotes';
 import { useState } from 'react';
 function App() {
-
+  const [authuser,setauthuser] = useState(null);
   return (
     <div className='h-full w-full'>
      <BrowserRouter>
-      <Navbar/>
+      <Navbar authuser={authuser} setauthuser={setauthuser}/>
       <Routes>
         <Route path="/"element={<Home ></Home>}></Route>
         <Route path="/upload" element={<Upload />} />
         <Route path="/browse" element={<Browse />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login  setauthuser={setauthuser} />} />
+        <Route path="/signup" element={<Signup setauthuser={setauthuser}/>} />
         <Route path='/browse/:sem' element={<Semnotes/>}/>
       </Routes>
      </BrowserRouter>
