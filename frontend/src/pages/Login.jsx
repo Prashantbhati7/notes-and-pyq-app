@@ -27,9 +27,14 @@ export default function Login({setauthuser}){
         // console.log("data is ",data.data);
         // setauthuser(data.data.email);
         // console.log("user logged in successfully ");
-        firebase.signInWithEmailAndPass(user.email,user.password);
+        try
+        {
+            await firebase.signInWithEmailAndPass(user.email,user.password);
         setuser({username:"",email:"",password:""});    
         navigate('/');
+        }catch(err){
+            alert("email or password entered is incorrect ");
+        }
     }
     const loginwithgoogle = async(e)=>{
        console.log("login with goole button clicked " );
@@ -40,8 +45,6 @@ export default function Login({setauthuser}){
     return(<>
     <div className="flex h-[92%] flex-row items-center justify-center">
     <form className="w-[40%] mt-10 "> 
-       <label htmlFor="username" >username</label>
-       <input type="text" id="email" name="username"  value={user.username} onChange={handlechange} className="border mb-6 py-1 w-full rounded-md outline-red" />
        <label htmlFor="email" >Email</label>
        <input type="text" id="email" name="email"  value={user.email} onChange={handlechange} className="border mb-6 py-1 w-full rounded-md outline-red" />
 

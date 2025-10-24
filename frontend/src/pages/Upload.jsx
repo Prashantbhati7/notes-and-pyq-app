@@ -1,7 +1,9 @@
 import { useState } from "react"
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from "react-router-dom";
+import { useFirebase } from "../components/context/firebase";
 export default function Upload(){
+  const firebase = useFirebase();
   const Navigate = useNavigate();
   const [wait,setwait] = useState(false);
     const [form,setform] = useState({
@@ -17,6 +19,11 @@ export default function Upload(){
 
     }
     const handlesubmit=async (e)=>{
+      if (!firebase.isloggedin) {
+        alert("You need to login in first to upload sometthing ");
+        Navigate('/login');
+        return ;
+      }
       e.preventDefault();
       
       const formData = new FormData();

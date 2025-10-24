@@ -78,7 +78,7 @@ app.post("/upload",upload.single("file"),asyncHandler( async (req, res,next) => 
 //Fetch All Notes Route
 app.get("/notes",async (req, res) => {
   const notes = await Note.find().sort({ createdAt: -1 });
-  res.json(notes);             // give notes as response when fetch req, is sent via frontend 
+  res.status(200).json(notes);             // give notes as response when fetch req, is sent via frontend 
 });
 
 const PORT = process.env.PORT;
