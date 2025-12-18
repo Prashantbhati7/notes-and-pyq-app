@@ -96,7 +96,7 @@ export default function Upload(){
               })) }/>
         </div>
         <div className="py-5 mx-auto">
-        <button className="bg-indigo-600 text-white w-full py-2 rounded-md hover:bg-indigo-700 transition" type="submit"> Submit</button>
+        <button className="bg-indigo-600 text-white w-full cursor-pointer py-2 rounded-md hover:bg-indigo-700 transition" type="submit"> Submit</button>
         </div>
         </form>
         </div>:<div>

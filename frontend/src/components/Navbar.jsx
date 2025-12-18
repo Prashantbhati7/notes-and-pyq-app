@@ -39,16 +39,16 @@ export default function Navbar({}) {
         {!firebase.isloggedin && (
           <>
             <div>
-              <button className="login sm:w-[20%] md:w-full  text-left animate-bounce text-xl" onClick={renderlogin}>Login</button>
+              <button className="login cursor-pointer sm:w-[20%] md:w-full  text-left animate-bounce text-xl" onClick={renderlogin}>Login</button>
             </div>
             <div>
-              <button className="signup sm:w-[20%] md:w-full  text-left text-xl" onClick={rendersignup}  >Signup</button>
+              <button className="signup cursor-pointer sm:w-[20%] md:w-full  text-left text-xl" onClick={rendersignup}  >Signup</button>
             </div>
           </>
         )}
 
         {firebase.isloggedin && (
-          <button className="text-xl" onClick={logout}>Logout</button>
+          <button className="text-xl cursor-pointer"  onClick={logout}>Logout</button>
         )}
 
       </div>

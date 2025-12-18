@@ -61,14 +61,14 @@ export default function Signup({setauthuser}){
            <label htmlFor="username">password</label>
            <input type="text" id="password" name="password" value={user.password} required onChange={handlechange} className="border mb-6 w-full rounded-md outline-red" />
     
-           <button className="border ms-[40%] px-8 py-1 rounded-md hover:bg-blue-400" type="submit" onClick={handlesubmit}>signup</button>
+           <button className="border ms-[40%] px-8 py-1 rounded-md cursor-pointer hover:bg-blue-400" type="submit" onClick={handlesubmit}>signup</button>
         </form> 
         <hr className="mt-4"/>
         <p className="text-center">or</p>
         <div className="flex w-full flex-row justify-center">
-            <button className="bg-blue-600 w-[40%] py-3 border rounded-xl text-center text-blue-100"onClick={singinwithgoogle}>continue with google</button>
+            <button className="bg-blue-600 w-[40%] py-3 border cursor-pointer rounded-xl text-center text-blue-100"onClick={singinwithgoogle}>continue with google</button>
         </div>
-        <div className="text-center w-full mt-3">already have account? <Link to='/login' className="text-blue-700">Log in</Link></div>
+        <div className="text-center w-full mt-3">already have account? <Link to='/login' className="text-blue-700 cursor-pointer">Log in</Link></div>
         </div>
         {/* </div> */}
         </>

@@ -54,10 +54,10 @@ export default function Login({setauthuser}){
        <hr  className="mt-4 "/>
        <p className="text-center">or</p>
        <div className="flex flex-row justify-center">
-        <button className="bg-blue-600 mt-4 w-full py-5 border rounded-xl text-center text-red-50" onClick={loginwithgoogle}>Continue with google</button>
+        <button className="bg-blue-600 cursor-pointer mt-4 w-full py-5 border rounded-xl text-center text-red-50" onClick={loginwithgoogle}>Continue with google</button>
        </div>
        <div className="flex flex-row mt-3 justify-center">
-        <p>new here? <Link to='/signup' className="text-blue-700">SignUp</Link></p>
+        <p>new here? <Link to='/signup' className="text-blue-700 cursor-pointer">SignUp</Link></p>
         </div>
     </form> 
     </div>
