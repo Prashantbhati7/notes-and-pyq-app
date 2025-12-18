@@ -39,7 +39,9 @@ export default function Semnotes() {
   return (<div className="h-full w-full">
     <p className="text-2xl border shadow-indigo-500/50 bg-indigo-300 text-center font-bold pb-4">📘 Notes for Semester {sem}</p>
 
-    {(loading) ? (<div className="h-[80vh] flex flex-row justify-center items-center"><CircularProgress size="5rem" /> </div>) : (notes.length == 0) ? <Squares
+    {(loading) ? (<div className="h-[80vh] flex flex-row justify-center items-center"> 
+      <CircularProgress size="5rem" />
+      <div className=" text-4xl text-center text-black">Loading fetching from server.... </div> </div>) : (notes.length == 0) ? <Squares
       speed={0.3}
       squareSize={50}
       direction='diagonal'
